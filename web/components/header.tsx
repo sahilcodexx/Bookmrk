@@ -6,7 +6,7 @@ import ThemeToggle from "./theme-toggle";
 const Header = () => {
   return (
     <div className="border-b">
-      <Container className="pt-4 pb-3 px-5">
+      <Container className="pt-4 pb-3 px-10">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-medium">Bookmrk</h2>
           <div className="flex items-center gap-6">
