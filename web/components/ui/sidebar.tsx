@@ -494,25 +494,48 @@ function SidebarMenuButton({
   size = "default",
   tooltip,
   className,
+  children,
   ...props
 }: React.ComponentProps<"button"> & {
   asChild?: boolean
   isActive?: boolean
   tooltip?: string | React.ComponentProps<typeof TooltipContent>
 } & VariantProps<typeof sidebarMenuButtonVariants>) {
-  const Comp = asChild ? Slot.Root : "button"
   const { isMobile, state } = useSidebar()
 
-  const button = (
-    <Comp
-      data-slot="sidebar-menu-button"
-      data-sidebar="menu-button"
-      data-size={size}
-      data-active={isActive}
-      className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
-      {...props}
-    />
-  )
+  const button =
+    asChild && React.isValidElement(children)
+      ? (() => {
+          const childElement = children as React.ReactElement<{ className?: string }>
+
+          const clonedProps = {
+            ...props,
+            className: cn(
+              sidebarMenuButtonVariants({ variant, size }),
+              className,
+              childElement.props.className
+            ),
+          } as any
+
+          clonedProps["data-slot"] = "sidebar-menu-button"
+          clonedProps["data-sidebar"] = "menu-button"
+          clonedProps["data-size"] = size
+          clonedProps["data-active"] = isActive
+
+          return React.cloneElement(childElement, clonedProps)
+        })()
+      : (
+          <button
+            data-slot="sidebar-menu-button"
+            data-sidebar="menu-button"
+            data-size={size}
+            data-active={isActive}
+            className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
+            {...props}
+          >
+            {children}
+          </button>
+        )
 
   if (!tooltip) {
     return button
