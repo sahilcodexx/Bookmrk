@@ -5,22 +5,24 @@ import { ArrowRightIcon } from "lucide-react";
 
 const Hero = () => {
   return (
-    <Container className=" h-screen px-10 py-5 ">
-      <div className="  h-full flex flex-col justify-center items-start">
-        <h2 className="text-3xl max-w-xl ">
-          One Place for All Your Favorite Links Save & Access anywhere
-        </h2>
-        <p className="text-neutral-600 mt-4 max-w-sm text-lg">
-          Access your favorite Bookmarks links anytime, anywhere, across all
-          your devices. Never lose a link again.
-        </p>
-        <div className="mt-4 flex items-center gap-5">
-          <Button size="lg" className="dark:bg-orange-600 mt-4">
+    <Container className=" h-scren py-5">
+      <div className="flex h-full flex-col items-start justify-start px-4 pt-10 pb-10 md:pt-45 md:pb-45 ">
+        <div className="px-10">
+          <h2 className="max-w-xl text-4xl">
+            A Better Way to Save and Revisit Links Anytime
+          </h2>
+          <p className="mt-4 max-w-md text-lg text-neutral-600">
+            Access your favorite Bookmarks links anytime, anywhere, across all
+            your devices and Never lose a link again.
+          </p>
+        </div>
+        <div className="mt-4 flex items-center gap-5 px-10">
+          <Button size="lg" className="mt-4 dark:bg-orange-600">
             Get started <ArrowRightIcon />
           </Button>
           <Button
             size="lg"
-            className=" bg-neutral-600/60 dark:bg-neutral-700/70 mt-4"
+            className="mt-4 bg-neutral-600/60 dark:bg-neutral-700/70"
           >
             Star Github
             <Githubicon />
