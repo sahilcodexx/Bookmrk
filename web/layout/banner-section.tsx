@@ -36,7 +36,7 @@ const BannerSection = () => {
         <div className="absolute z-10 h-2 w-2 bottom-0 xl:-bottom-1 right-0 xl:-right-1 rounded-none bg-black dark:bg-white"></div>
         <div
           ref={wrapperRef}
-          className="my-10 mx-10 rounded-lg border dark:border-neutral-500 overflow-visible bg-[repeating-linear-gradient(60deg,_#d4d4d4_0px,_#e5e5e5_1px,_transparent_1px,_transparent_6px)] dark:bg-[repeating-linear-gradient(60deg,_#73737360_0px,_#737373_1px,_transparent_1px,_transparent_6px)]"
+          className="my-10 mx-10 rounded-lg border dark:border-neutral-500 overflow-visible bg-[repeating-linear-gradient(60deg,#d4d4d4_0px,#e5e5e5_1px,transparent_1px,transparent_6px)] dark:bg-[repeating-linear-gradient(60deg,#73737360_0px,#737373_1px,transparent_1px,transparent_6px)]"
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
         >

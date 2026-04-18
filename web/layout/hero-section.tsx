@@ -1,11 +1,13 @@
 import Container from "@/components/container";
+import Copypaste from "@/components/copypaste";
 import Githubicon from "@/components/github";
+import BookmarkBox from "@/components/ui/bookmarkbox";
 import { Button } from "@/components/ui/button";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, Bookmark } from "lucide-react";
 
 const Hero = () => {
   return (
-    <Container className=" h-scren py-5">
+    <Container className=" h-scren py-5 flex md:flex-row flex-col items-center justify-between gap-20">
       <div className="flex h-full flex-col items-start justify-start px-4 pt-10 pb-10 md:pt-45 md:pb-45 ">
         <div className="px-10">
           <h2 className="max-w-xl text-4xl">
@@ -20,15 +22,13 @@ const Hero = () => {
           <Button size="lg" className="mt-4 dark:bg-orange-600">
             Get started <ArrowRightIcon />
           </Button>
-          <Button
-            size="lg"
-            className="mt-4 bg-neutral-600/60 dark:bg-neutral-700/70"
-          >
+          <Button size="lg" variant="outline" className="mt-4 shadow-xs">
             Star Github
             <Githubicon />
           </Button>
         </div>
       </div>
+      <BookmarkBox />
     </Container>
   );
 };
