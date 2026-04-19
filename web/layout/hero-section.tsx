@@ -1,9 +1,8 @@
 import Container from "@/components/container";
-import Copypaste from "@/components/copypaste";
 import Githubicon from "@/components/github";
 import BookmarkBox from "@/components/ui/bookmarkbox";
 import { Button } from "@/components/ui/button";
-import { ArrowRightIcon, Bookmark } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
 
 const Hero = () => {
   return (
