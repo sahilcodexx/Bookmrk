@@ -26,10 +26,11 @@ const LogoSection = () => {
             {companies.map((company, index) => (
               <motion.div
                 key={company.name}
-                initial={{ opacity: 0, filter: "blur(10px)", y: 10 }}
-                animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                initial={{ opacity: 0, filter: "blur(10px)", y: 5 }}
+                whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex items-center justify-center px-25 py-8 border dark:border-neutral-800/60 "
+                className="hover:dark:bg-neutral-900/70 hover:bg-neutral-50 flex transition-colors duration-200 items-center justify-center px-25 py-8 border dark:border-neutral-800/60 border-neutral-200/50 "
               >
                 {company.name}
               </motion.div>

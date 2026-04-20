@@ -9,7 +9,9 @@ const Header = () => {
       <div className="border-b dark:border-neutral-600/70 border-neutral-300">
         <Container className="pt-4 pb-3 px-10  top-0 backdrop-blur-xl">
           <div className="flex justify-between items-center">
-            <h2 className="text-xl font-medium">Bookmrk</h2>
+            <Link href="/">
+              <h2 className="text-xl font-medium">Bookmrk</h2>
+            </Link>
             <div className="flex items-center gap-6">
               <Link
                 href="#"
