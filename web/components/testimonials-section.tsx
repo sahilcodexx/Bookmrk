@@ -101,18 +101,50 @@ const testimonials: Testimonial[] = [
     name: "OrcDev",
     role: "Youtuber",
   },
+  {
+    quote:
+      "I had 10,000 bookmarks scattered across browsers and notes. Bookmrk saved my sanity and my links in one beautiful place.",
+    image: "https://unavatar.io/x/linus",
+    name: "Linus Torvalds",
+    role: "Creator",
+    company: "Linux",
+  },
+  {
+    quote:
+      "Finally, a bookmark manager that doesn't feel like it was designed in 1999. My tabs tab is finally empty.",
+    image: "https://github.com/evbomg.png",
+    name: "Eva",
+    role: "Developer",
+    company: "Vercel",
+  },
+  {
+    quote:
+      "I used to lose links faster than I could save them. Now my bookmarks are more organized than my actual life.",
+    image: "https://unavatar.io/x/dhh",
+    name: "DHH",
+    role: "Creator",
+    company: "Ruby on Rails",
+  },
+  {
+    quote:
+      "Bookmrk is the only place where my 'read later' list actually gets read. The UI is just too good to ignore.",
+    image: "https://unavatar.io/x/fireship",
+    name: "Jeff",
+    role: "Creator",
+    company: "Fireship",
+  },
 ];
 
 export function TestimonialsSection() {
   return (
     <div className="mx-auto min-h-screen max-w-5xl space-y-8 border-x py-6">
       <div className="flex flex-col gap-2 px-4 md:px-6">
-        <h1 className="text-center text-4xl tracking-wide max-w-sm m-auto">
-          Real Results, Real Voices 
+        <h1 className="text-center text-3xl tracking-wide max-w-sm m-auto">
+          Loved by Developers Who Save Links
         </h1>
-        <p className="text-muted-foreground text-sm md:text-sm max-w-sm text-center w-full m-auto">
-          Used by thousands of developers to build beautiful, accessible, and
-          performant web applications.
+        <p className="text-muted-foreground text-sm md:text-sm max-w-xs text-center w-full m-auto">
+          Join thousands of developers who never lose track of their favorite
+          links.
         </p>
       </div>
       <div className="relative grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
