@@ -7,14 +7,14 @@ import { BlinkingGrid } from "@/components/ui/blinking-grid";
 
 const Hero = () => {
   return (
-    <Container className="relative min-h-[70vh] py-12 md:py-16 flex md:flex-row flex-col items-center justify-between gap-12 md:gap-20 overflow-hidden">
+    <Container className="relative min-h-[500px] md:min-h-[700px] py-12 md:py-16 flex md:flex-row flex-col items-center justify-between gap-12 md:gap-20 overflow-hidden">
       {/* BLINKING GRID BACKGROUND TOP LEFT */}
-      <div className="absolute top-0 left-0 w-[500px] h-[400px] pointer-events-none z-0 [mask-image:radial-gradient(ellipse_at_top_left,black_10%,transparent_50%)] opacity-70">
+      <div className="absolute top-0 left-0 w-[500px] h-[400px] pointer-events-none z-0 [mask-image:radial-gradient(ellipse_at_top_left,black_10%,transparent_50%)] opacity-90">
         <BlinkingGrid />
       </div>
       
       {/* BLINKING GRID BACKGROUND BOTTOM RIGHT */}
-      <div className="absolute bottom-0 right-0 w-[500px] h-[400px] pointer-events-none z-0 [mask-image:radial-gradient(ellipse_at_bottom_right,black_10%,transparent_50%)] opacity-70">
+      <div className="absolute bottom-0 right-0 w-[500px] h-[400px] pointer-events-none z-0 [mask-image:radial-gradient(ellipse_at_bottom_right,black_10%,transparent_50%)] opacity-90">
         <BlinkingGrid />
       </div>
 

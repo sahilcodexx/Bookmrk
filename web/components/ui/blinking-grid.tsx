@@ -49,10 +49,10 @@ export function BlinkingGrid() {
       const time = Date.now() * 0.001;
 
       const isDark = document.documentElement.classList.contains("dark");
-      // Cyan in dark mode, black/dark-gray in light mode
-      const r = isDark ? 0 : 0;
-      const g = isDark ? 180 : 0;
-      const b = isDark ? 180 : 0;
+      // #818189 in dark mode, black/dark-gray in light mode
+      const r = isDark ? 129 : 0;
+      const g = isDark ? 129 : 0;
+      const b = isDark ? 137 : 0;
 
       for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
