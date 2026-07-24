@@ -1,16 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactStrictMode: false, // prevents double render in dev
+  reactStrictMode: false,
 
   experimental: {
-    serverActions: {}, // disable unstable features if causing issues
+    serverActions: {},
   },
 
-  // Optional: helps avoid aggressive caching behavior
   onDemandEntries: {
-    maxInactiveAge: 0, // disables page "hibernation"
+    maxInactiveAge: 0,
     pagesBufferLength: 5,
+  },
+
+  turbopack: {
+    root: __dirname,
   },
 };
 

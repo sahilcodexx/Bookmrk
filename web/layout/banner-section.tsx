@@ -48,7 +48,7 @@ const BannerSection = () => {
           >
             <Image
               loading="eager"
-              src="/image.webp"
+              src="/dashboard.png"
               height={800}
               width={1200}
               alt="banner"

@@ -1,54 +1,19 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { DashboardShell } from "@/components/dashboard-shell";
+
+const links = [
+  { title: "Build Your Application", link: "https://sahilcodex.vercel.app/" },
+  { title: "tcxcommit", link: "https://tcxcommit.vercel.app/" },
+  { title: "keyui", link: "https://keyui.vercel.app/" },
+];
 
 export default function Page() {
-  const links = [
-    { title: "Build Your Application", link: "https://sahilcodex.vercel.app/" },
-    { title: "tcxcommit", link: "https://tcxcommit.vercel.app/" },
-    { title: "keyui", link: "https://keyui.vercel.app/" },
-  ];
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator
-            orientation="vertical"
-            className="mr-2 data-vertical:h-4 data-vertical:self-auto"
-          />
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">Build Your Application</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </header>
-
-        <div className="flex flex-1 flex-col gap-4 p-4">
-          {links.map((link, idx) => (
-            <div key={idx}>{link.title}</div>
-          ))}
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+    <DashboardShell>
+      <div className="flex flex-1 flex-col gap-4 p-4">
+        {links.map((link, idx) => (
+          <div key={idx}>{link.title}</div>
+        ))}
+      </div>
+    </DashboardShell>
   );
 }
