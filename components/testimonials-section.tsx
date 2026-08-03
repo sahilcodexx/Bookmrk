@@ -103,7 +103,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "I had 10,000 bookmarks scattered across browsers and notes. Bookmrk saved my sanity and my links in one beautiful place.",
+      "I had 10,000 bookmarks scattered across browsers and notes. Bookmrkly saved my sanity and my links in one beautiful place.",
     image: "https://unavatar.io/x/linus",
     name: "Linus Torvalds",
     role: "Creator",
@@ -127,7 +127,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "Bookmrk is the only place where my 'read later' list actually gets read. The UI is just too good to ignore.",
+      "Bookmrkly is the only place where my 'read later' list actually gets read. The UI is just too good to ignore.",
     image: "https://unavatar.io/x/fireship",
     name: "Jeff",
     role: "Creator",

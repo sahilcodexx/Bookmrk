@@ -10,7 +10,7 @@ const Header = () => {
         <Container className="pt-4 pb-3 px-10  top-0 backdrop-blur-xl">
           <div className="flex justify-between items-center">
             <Link href="/">
-              <h2 className="text-xl font-medium">Bookmrk</h2>
+              <h2 className="text-xl font-medium">Bookmrkly</h2>
             </Link>
             <div className="flex items-center gap-6">
               <Link
