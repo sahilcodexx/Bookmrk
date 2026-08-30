@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "Bookmrkly",
