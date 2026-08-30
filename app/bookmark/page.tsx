@@ -5,7 +5,7 @@ import Container from "@/components/container";
 import { BlinkingGrid } from "@/components/ui/blinking-grid";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { Plus, X, Sparkles, Tag, Trash2, Shuffle, Check, Settings, Pencil, Home } from "lucide-react";
+import { Plus, X, Tag, Trash2, Check, Pencil, Home } from "lucide-react";
 import {
   MultiSelect,
   MultiSelectContent,
@@ -33,6 +33,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Tooltip } from "@/components/motion/tooltip";
 
 type BookmarkType = string;
 type BookmarkAction = string;
@@ -1665,12 +1666,6 @@ export default function BookmarkPage() {
     });
   }, [query, activeTypes, activeActions, selectedTags]);
 
-  const randomBookmark = () => {
-    if (filtered.length === 0) return;
-    const pick = filtered[Math.floor(Math.random() * filtered.length)];
-    window.open(pick.href, "_blank", "noopener,noreferrer");
-  };
-
   return (
     <main className="relative min-h-[calc(100vh-4rem)] w-full">
       <Container className="relative min-h-[calc(100vh-4rem)] overflow-hidden px-6 py-16 sm:py-20 sm:px-10">
@@ -1898,63 +1893,48 @@ export default function BookmarkPage() {
       <div className="pointer-events-none fixed inset-x-0 bottom-6 z-30 flex justify-center">
         <div className="pointer-events-auto">
           <Dock size={44}>
-            {/* Actions: create + discover */}
-            <DockItem
-              onClick={() => {
-                const btn = document.querySelector<HTMLButtonElement>(
-                  '[data-add-bookmark-trigger]'
-                );
-                btn?.click();
-              }}
-              aria-label="Add bookmark"
-            >
-              <Plus className="size-4" />
-            </DockItem>
-            <DockItem
-              onClick={randomBookmark}
-              active={false}
-              aria-label="Random bookmark"
-            >
-              <Shuffle className="size-4" />
-            </DockItem>
-            <DockItem
-              onClick={() => searchInputRef.current?.focus()}
-              aria-label="Focus search"
-            >
-              <Sparkles className="size-4" />
-            </DockItem>
+            <Tooltip content="Home" side="top">
+              <DockItem aria-label="Home">
+                <a href="/" aria-label="Home" className="flex items-center justify-center">
+                  <Home className="size-4" />
+                </a>
+              </DockItem>
+            </Tooltip>
             <DockSeparator />
-            {/* Management */}
-            <DockItem
-              onClick={enterSelectMode}
-              active={selectMode}
-              aria-label="Delete bookmarks"
-            >
-              <Trash2 className="size-4" />
-            </DockItem>
-            <DockItem
-              onClick={() => {
-                setEditMode((v) => !v);
-                setEditingBookmark(null);
-              }}
-              active={editMode}
-              aria-label="Edit"
-            >
-              <Pencil className="size-4" />
-            </DockItem>
-            <DockItem
-              onClick={() => alert("Settings coming soon")}
-              aria-label="Settings"
-            >
-              <Settings className="size-4" />
-            </DockItem>
-            <DockSeparator />
-            {/* Navigation */}
-            <DockItem aria-label="Home">
-              <a href="/" aria-label="Home" className="flex items-center justify-center">
-                <Home className="size-4" />
-              </a>
-            </DockItem>
+            <Tooltip content={editMode ? "Stop editing" : "Edit bookmarks"} side="top">
+              <DockItem
+                onClick={() => {
+                  setEditMode((v) => !v);
+                  setEditingBookmark(null);
+                }}
+                active={editMode}
+                aria-label="Edit"
+              >
+                <Pencil className="size-4" />
+              </DockItem>
+            </Tooltip>
+            <Tooltip content="Add bookmark" side="top">
+              <DockItem
+                onClick={() => {
+                  const btn = document.querySelector<HTMLButtonElement>(
+                    '[data-add-bookmark-trigger]'
+                  );
+                  btn?.click();
+                }}
+                aria-label="Add bookmark"
+              >
+                <Plus className="size-4" />
+              </DockItem>
+            </Tooltip>
+            <Tooltip content={selectMode ? "Exit select" : "Delete bookmarks"} side="top">
+              <DockItem
+                onClick={enterSelectMode}
+                active={selectMode}
+                aria-label="Delete bookmarks"
+              >
+                <Trash2 className="size-4" />
+              </DockItem>
+            </Tooltip>
           </Dock>
         </div>
       </div>

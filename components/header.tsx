@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "./container";
 import Link from "next/link";
-import ThemeToggle from "./theme-toggle";
+import { ThemeToggle } from "./motion/theme-toggle";
 
 const Header = () => {
   return (
