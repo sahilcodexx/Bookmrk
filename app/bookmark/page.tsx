@@ -6,19 +6,13 @@ import { BlinkingGrid } from "@/components/ui/blinking-grid";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Plus, X, Tag, Trash2, Check, Pencil, Home } from "lucide-react";
+import { MultipleSelect } from "@/components/ui/multiple-select";
+import { toast } from "@/components/ui/toast";
 import {
-  MultiSelect,
-  MultiSelectContent,
-  MultiSelectEmpty,
-  MultiSelectGroup,
-  MultiSelectInput,
-  MultiSelectItem,
-  MultiSelectLabel,
-  MultiSelectList,
-  MultiSelectSeparator,
-  MultiSelectTrigger,
-  MultiSelectValue,
-} from "@/components/motion/multi-select";
+  useBookmarks,
+  type Bookmark as ApiBookmark,
+  type CustomTag as ApiCustomTag,
+} from "@/lib/hooks/use-bookmarks";
 import {
   Dock,
   DockItem,
@@ -92,226 +86,6 @@ const DEFAULT_ACTIONS: BookmarkAction[] = [
   "Join",
   "Follow",
   "Apply",
-];
-
-const bookmarks: BookmarkItem[] = [
-  {
-    id: "1",
-    title: "AICSS",
-    description:
-      "Beautifully designed, copy-paste UI components for AI agent interfaces.",
-    type: "Read",
-    action: "Use",
-    date: "AUG 29, 26",
-    href: "https://aicss.dev",
-  },
-  {
-    id: "2",
-    title: "On AI, systems, taste and the human filter",
-    description:
-      "A thoughtful essay on how human judgment still shapes the systems we build with AI.",
-    type: "Read",
-    action: "Learn",
-    date: "AUG 28, 26",
-    href: "#",
-  },
-  {
-    id: "3",
-    title: "Cuelume",
-    description:
-      "Cuelume is a tiny, dependency-free library of carefully designed UI cues.",
-    type: "Browse",
-    action: "Build",
-    date: "AUG 26, 26",
-    href: "#",
-  },
-  {
-    id: "4",
-    title: "The Rise of Design Engineering",
-    description:
-      "Why design engineering is becoming a first-class discipline in product teams.",
-    type: "Read",
-    action: "Learn",
-    date: "AUG 26, 26",
-    href: "#",
-  },
-  {
-    id: "5",
-    title: "Is AI going to steal my job as a design engineer?",
-    description:
-      "What's changed, what hasn't, and how to stay useful in an AI-shaped workflow.",
-    type: "Read",
-    action: "Learn",
-    date: "AUG 24, 26",
-    href: "#",
-  },
-  {
-    id: "6",
-    title: "UI Camera",
-    description:
-      "Create beautiful product visuals from your UI. Studio-quality shots in seconds.",
-    type: "Watch",
-    action: "Use",
-    date: "AUG 22, 26",
-    href: "#",
-  },
-  {
-    id: "7",
-    title: "Interface Cheat Sheet",
-    description:
-      "A list of tips, improvements and best practices for everyday interface work.",
-    type: "Read",
-    action: "Learn",
-    date: "AUG 21, 26",
-    href: "#",
-  },
-  {
-    id: "8",
-    title: "Morphig",
-    description:
-      "How icon morphing actually works, in ten parts, ending with a real demo.",
-    type: "Watch",
-    action: "Learn",
-    date: "AUG 20, 26",
-    href: "#",
-  },
-  {
-    id: "9",
-    title: "How to become an AI Designer",
-    description:
-      "A realistic guide to shipping your own AI design projects from scratch.",
-    type: "Read",
-    action: "Apply",
-    date: "AUG 16, 26",
-    href: "#",
-  },
-  {
-    id: "10",
-    title: "morphicons",
-    description:
-      "Morph any SVG icon into any other with spring physics and no jank.",
-    type: "Browse",
-    action: "Build",
-    date: "AUG 16, 26",
-    href: "#",
-  },
-  {
-    id: "11",
-    title: "interior.dev",
-    description:
-      "Micro-interactions for react, built for the half-second attention span.",
-    type: "Browse",
-    action: "Build",
-    date: "AUG 13, 26",
-    href: "#",
-  },
-  {
-    id: "12",
-    title: "liquid-glass",
-    description:
-      "A headless React lens that refracts the live page into a glassy surface.",
-    type: "Watch",
-    action: "Build",
-    date: "AUG 11, 26",
-    href: "#",
-  },
-  {
-    id: "13",
-    title: "Liquid Gooey",
-    description: "Liquid UI effects for React, with a single component drop-in.",
-    type: "Browse",
-    action: "Use",
-    date: "AUG 11, 26",
-    href: "#",
-  },
-  {
-    id: "14",
-    title: "crd-ui",
-    description:
-      "A credit & debit card component for payment forms: live brand detection.",
-    type: "Browse",
-    action: "Use",
-    date: "AUG 05, 26",
-    href: "#",
-  },
-  {
-    id: "15",
-    title: "Fluid Functionalism",
-    description:
-      "Open Source UI components created by @mick, designed to feel alive.",
-    type: "Browse",
-    action: "Build",
-    date: "AUG 05, 26",
-    href: "#",
-  },
-  {
-    id: "16",
-    title: "Thinking orbs",
-    description:
-      "Dotted thought-orb loading indicators for AI and agent interfaces.",
-    type: "Watch",
-    action: "Use",
-    date: "JUL 22, 26",
-    href: "#",
-  },
-  {
-    id: "17",
-    title: "jakubkrehel/skills",
-    description:
-      "A set of agent skills that help improve different parts of a workflow.",
-    type: "Read",
-    action: "Use",
-    date: "JUL 15, 26",
-    href: "#",
-  },
-  {
-    id: "18",
-    title: "dither-kit",
-    description:
-      "Composable, dithered charts with a recharts-style children API.",
-    type: "Browse",
-    action: "Build",
-    date: "JUL 13, 26",
-    href: "#",
-  },
-  {
-    id: "19",
-    title: "abtest.design",
-    description:
-      "Curated collection of A/B test results from best-in-class product teams.",
-    type: "Read",
-    action: "Apply",
-    date: "JUL 13, 26",
-    href: "#",
-  },
-  {
-    id: "20",
-    title: "Agentation",
-    description:
-      "The visual feedback tool for agents: click, comment, fix in context.",
-    type: "Browse",
-    action: "Join",
-    date: "JUL 13, 26",
-    href: "#",
-  },
-  {
-    id: "21",
-    title: "Autumn",
-    description: "Founding Design Engineer / Remote — open roles this season.",
-    type: "Read",
-    action: "Apply",
-    date: "JUL 13, 26",
-    href: "#",
-  },
-  {
-    id: "22",
-    title: "Zed",
-    description: "Product Design Engineer / Remote — help build the next editor.",
-    type: "Read",
-    action: "Apply",
-    date: "JUL 13, 26",
-    href: "#",
-  },
 ];
 
 const typeFilters: BookmarkType[] = ["Read", "Watch", "Listen", "Browse"];
@@ -582,7 +356,7 @@ function BookmarkRow({
             onEdit(item);
           }
         }}
-        className="group/link flex flex-1 items-center gap-3"
+        className="group/link flex min-w-0 flex-1 items-center gap-3"
       >
         {editMode ? (
           <Pencil
@@ -597,11 +371,17 @@ function BookmarkRow({
             )}
           />
         )}
-      <span className="shrink-0 font-semibold tracking-tight">
+      <span
+        className="min-w-0 max-w-[20ch] shrink truncate font-semibold tracking-tight"
+        title={item.title}
+      >
         {item.title}
       </span>
       <span className="text-muted-foreground">·</span>
-      <span className="truncate text-muted-foreground group-hover/link:text-foreground/80">
+      <span
+        className="min-w-0 max-w-[48ch] shrink truncate text-muted-foreground group-hover/link:text-foreground/80"
+        title={item.description}
+      >
         {item.description}
       </span>
       <span className="ml-auto shrink-0 font-mono text-[11px] tracking-wide text-muted-foreground">
@@ -655,14 +435,14 @@ function AddTagButton({
       <DialogTrigger
         data-add-tag-trigger=""
         className={cn(
-          "inline-flex items-center justify-center gap-1.5 rounded-lg border border-dashed px-3 text-xs font-medium transition-colors",
+          "group/add inline-flex items-center justify-center gap-1.5 rounded-lg border border-dashed px-3 text-xs font-medium transition-colors",
           "border-neutral-300 text-muted-foreground hover:border-neutral-400 hover:text-foreground",
           "dark:border-neutral-700 dark:hover:border-neutral-600"
         )}
-        style={{ height: "36px" }}
+        style={{ height: "32px" }}
       >
         <Plus className="h-3.5 w-3.5" />
-        Add
+        Add tag
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -857,11 +637,10 @@ function AddBookmarkButton({
       <DialogTrigger
         data-add-bookmark-trigger=""
         className={cn(
-          "inline-flex items-center justify-center gap-1.5 rounded-lg border border-dashed px-3 text-xs font-medium transition-colors",
-          "border-neutral-300 text-muted-foreground hover:border-neutral-400 hover:text-foreground",
-          "dark:border-neutral-700 dark:hover:border-neutral-600"
+          "inline-flex h-9 items-center justify-center gap-1.5 rounded-lg border px-2.5 text-xs font-medium transition-all",
+          "border-pink-300 bg-white text-pink-700 hover:bg-pink-50 hover:border-pink-400",
+          "dark:border-pink-400/50 dark:bg-white dark:text-pink-700 dark:hover:bg-pink-50"
         )}
-        style={{ height: "36px" }}
       >
         <Plus className="h-3.5 w-3.5" />
         Add Bookmark
@@ -1465,17 +1244,64 @@ function EditBookmarkDialog({
 }
 
 export default function BookmarkPage() {
+  // ---- Supabase-backed data layer ----
+  // The page used to seed from a hardcoded `bookmarks` array; now it
+  // delegates to the `useBookmarks()` hook which talks to
+  // /api/bookmarks + /api/tags. The local shape (`bookmarkList`,
+  // `customTypes`, `customActions`) is kept so the rest of the page
+  // doesn't have to be rewritten — `customTypes` / `customActions` are
+  // now derived from `customTags` returned by the hook.
+  const {
+    bookmarks: apiBookmarks,
+    customTags: apiCustomTags,
+    loaded: apiLoaded,
+    addBookmark: apiAddBookmark,
+    updateBookmark: apiUpdateBookmark,
+    deleteBookmark: apiDeleteBookmark,
+    deleteBookmarksBulk: apiDeleteBookmarksBulk,
+    addCustomTag: apiAddCustomTag,
+    deleteCustomTag: apiDeleteCustomTag,
+  } = useBookmarks();
+
+  // The custom tags returned by Supabase split by `kind` so the page's
+  // existing `customTypes` / `customActions` shape is preserved.
+  const customTypes: { label: string; color: string }[] = useMemo(
+    () =>
+      apiCustomTags
+        .filter((t) => t.kind === "type")
+        .map((t) => ({ label: t.label, color: t.color })),
+    [apiCustomTags]
+  );
+  const customActions: { label: string; color: string }[] = useMemo(
+    () =>
+      apiCustomTags
+        .filter((t) => t.kind === "action")
+        .map((t) => ({ label: t.label, color: t.color })),
+    [apiCustomTags]
+  );
+
+  // Map the API bookmark shape to the page's local `BookmarkItem`
+  // (the rest of the page expects a non-nullable `description` and a
+  // `date` string).
+  const bookmarkList: BookmarkItem[] = useMemo(
+    () =>
+      apiBookmarks.map((b) => ({
+        id: b.id,
+        title: b.title,
+        description: b.description ?? b.href,
+        type: b.type as BookmarkType,
+        action: b.action as BookmarkAction,
+        date: b.date ?? "",
+        href: b.href,
+      })),
+    [apiBookmarks]
+  );
+
   const [query, setQuery] = useState("");
   const [activeTypes, setActiveTypes] = useState<Set<BookmarkType>>(new Set());
   const [activeActions, setActiveActions] = useState<Set<BookmarkAction>>(
     new Set()
   );
-  const [customTypes, setCustomTypes] = useState<
-    { label: string; color: string }[]
-  >([]);
-  const [customActions, setCustomActions] = useState<
-    { label: string; color: string }[]
-  >([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -1503,8 +1329,16 @@ export default function BookmarkPage() {
 
   const tagOptions = useMemo(
     () => [
-      ...allTypes.map((label) => ({ label, color: getTypeColor(label) })),
-      ...allActions.map((label) => ({ label, color: getActionColor(label) })),
+      ...allTypes.map((label) => ({
+        id: label,
+        name: label,
+        color: getTypeColor(label),
+      })),
+      ...allActions.map((label) => ({
+        id: label,
+        name: label,
+        color: getActionColor(label),
+      })),
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [allTypes, allActions, customTypes, customActions]
@@ -1526,8 +1360,9 @@ export default function BookmarkPage() {
     });
   };
 
-  const removeType = (t: string) => {
-    setCustomTypes((prev) => prev.filter((c) => c.label !== t));
+  const removeType = async (t: string) => {
+    const target = apiCustomTags.find((x) => x.kind === "type" && x.label === t);
+    if (target) await apiDeleteCustomTag(target.id);
     setActiveTypes((prev) => {
       const next = new Set(prev);
       next.delete(t);
@@ -1535,8 +1370,9 @@ export default function BookmarkPage() {
     });
     setSelectedTags((prev) => prev.filter((v) => v !== t));
   };
-  const removeAction = (a: string) => {
-    setCustomActions((prev) => prev.filter((c) => c.label !== a));
+  const removeAction = async (a: string) => {
+    const target = apiCustomTags.find((x) => x.kind === "action" && x.label === a);
+    if (target) await apiDeleteCustomTag(target.id);
     setActiveActions((prev) => {
       const next = new Set(prev);
       next.delete(a);
@@ -1545,70 +1381,83 @@ export default function BookmarkPage() {
     setSelectedTags((prev) => prev.filter((v) => v !== a));
   };
 
-  const addType = (label: string, color: string) =>
-    setCustomTypes((prev) => [...prev, { label, color }]);
-  const addAction = (label: string, color: string) =>
-    setCustomActions((prev) => [...prev, { label, color }]);
-
-  const [bookmarkList, setBookmarkList] = useState<BookmarkItem[]>(bookmarks);
   const [editMode, setEditMode] = useState(false);
   const [selectMode, setSelectMode] = useState(false);
   const [editingBookmark, setEditingBookmark] = useState<BookmarkItem | null>(null);
-  const addBookmark = (b: { title: string; href: string; tags: string[]; description?: string }) => {
-    const now = new Date();
-    const date = now
-      .toLocaleDateString("en-US", {
-        month: "short",
-        day: "2-digit",
-        year: "2-digit",
-      })
-      .toUpperCase()
-      .replace(",", "")
-      .replace(/(\w+) (\d+)/, "$1 $2,");
-    const tags = b.tags.length > 0 ? b.tags : ["Read", "Use"];
-    const typeTag =
-      [...tags].reverse().find((t) => allTypes.includes(t)) ?? "Read";
-    const actionTag =
-      [...tags].reverse().find((t) => allActions.includes(t)) ?? "Use";
-    setBookmarkList((prev) => [
-      {
-        id: `bm-${Date.now()}`,
-        title: b.title,
-        description: b.description || b.href,
-        type: typeTag,
-        action: actionTag,
-        date,
-        href: b.href,
-      },
-      ...prev,
-    ]);
+
+  const addType = async (label: string, color: string) => {
+    try {
+      await apiAddCustomTag({ label, color, kind: "type" });
+      toast.add({
+        type: "success",
+        title: "Type added",
+        description: `"${label}" is now a filterable type.`,
+      });
+    } catch {
+      // Hook already toasts on failure.
+    }
+  };
+  const addAction = async (label: string, color: string) => {
+    try {
+      await apiAddCustomTag({ label, color, kind: "action" });
+      toast.add({
+        type: "success",
+        title: "Action added",
+        description: `"${label}" is now a filterable action.`,
+      });
+    } catch {
+      // Hook already toasts on failure.
+    }
   };
 
-  const updateBookmark = (
+  const addBookmark = async (b: {
+    title: string;
+    href: string;
+    tags: string[];
+    description?: string;
+  }) => {
+    try {
+      await apiAddBookmark(b);
+      toast.add({
+        type: "success",
+        title: "Bookmark added",
+        description: b.title,
+      });
+    } catch {
+      // Hook already toasts on failure.
+    }
+  };
+
+  const updateBookmark = async (
     id: string,
     b: { title: string; href: string; tags: string[]; description?: string }
   ) => {
-    setBookmarkList((prev) =>
-      prev.map((bm) => {
-        if (bm.id !== id) return bm;
-        const typeTag =
-          [...b.tags].reverse().find((t) => allTypes.includes(t)) ?? bm.type;
-        const actionTag =
-          [...b.tags].reverse().find((t) => allActions.includes(t)) ?? bm.action;
-        return {
-          ...bm,
-          title: b.title,
-          description: b.description || b.href,
-          href: b.href,
-          type: typeTag,
-          action: actionTag,
-        };
-      })
-    );
+    try {
+      await apiUpdateBookmark(id, b);
+      toast.add({
+        type: "success",
+        title: "Bookmark updated",
+        description: b.title,
+      });
+    } catch {
+      // Hook already toasts on failure.
+    }
   };
 
-  const deleteBookmark = (id: string) => {
-    setBookmarkList((prev) => prev.filter((bm) => bm.id !== id));
+  const deleteBookmark = async (id: string) => {
+    const target = bookmarkList.find((bm) => bm.id === id);
+    try {
+      await apiDeleteBookmark(id);
+      if (target) {
+        toast.add({
+          type: "info",
+          title: "Bookmark deleted",
+          description: target.title,
+        });
+      }
+    } catch {
+      // Hook already toasts on failure.
+    }
   };
 
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
@@ -1633,10 +1482,21 @@ export default function BookmarkPage() {
     setSelectedIds(new Set());
   };
 
-  const confirmDeleteSelected = () => {
-    setBookmarkList((prev) => prev.filter((bm) => !selectedIds.has(bm.id)));
+  const confirmDeleteSelected = async () => {
+    const ids = Array.from(selectedIds);
+    const count = ids.length;
+    if (count === 0) return;
     setSelectedIds(new Set());
     setSelectMode(false);
+    try {
+      await apiDeleteBookmarksBulk(ids);
+      toast.add({
+        type: "info",
+        title: `${count} bookmark${count === 1 ? "" : "s"} deleted`,
+      });
+    } catch {
+      // Hook already toasts on failure.
+    }
   };
 
   const clearAll = () => {
@@ -1645,6 +1505,11 @@ export default function BookmarkPage() {
     setActiveActions(new Set());
     setSelectedTags([]);
     setSelectedIds(new Set());
+    toast.add({
+      type: "info",
+      title: "Filters cleared",
+      description: "Search and tag filters have been reset.",
+    });
   };
 
   const filtered = useMemo(() => {
@@ -1664,7 +1529,7 @@ export default function BookmarkPage() {
         b.description.toLowerCase().includes(q)
       );
     });
-  }, [query, activeTypes, activeActions, selectedTags]);
+  }, [bookmarkList, query, activeTypes, activeActions, selectedTags]);
 
   return (
     <main className="relative min-h-[calc(100vh-4rem)] w-full">
@@ -1697,94 +1562,35 @@ export default function BookmarkPage() {
         </div>
 
         <div className="flex flex-col items-center gap-3">
-          {/* TOP ROW: Search + Tags multi-select + Add + Clear All */}
+          {/* TOP ROW: Search + Tags multi-select + Add + Clear All.
+              All four elements share the same `h-9` height, `rounded-lg`
+              border, `text-xs` label, and `px-2.5` padding so they line
+              up flush — no more uneven button/input heights. */}
           <div className="flex flex-wrap items-center justify-center gap-2">
             <input
               ref={searchInputRef}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search here..."
-              className="h-9 w-full min-w-0 rounded-lg border border-neutral-300 bg-transparent px-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-neutral-400 dark:border-neutral-700 sm:w-56"
-              style={{ height: "36px" }}
+              className="h-9 w-full min-w-0 rounded-lg border border-neutral-300 bg-transparent px-2.5 text-xs outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-neutral-400 dark:border-neutral-700 sm:w-56"
             />
 
-            <MultiSelect
-              value={selectedTags}
-              onValueChange={setSelectedTags}
-              className="w-auto"
+            <MultipleSelect
+              placeholder="Search tags…"
+              className="w-60"
+              items={tagOptions}
+              selectedKeys={new Set(selectedTags)}
+              onSelectionChange={(keys) => setSelectedTags(Array.from(keys))}
             >
-              <MultiSelectTrigger
-                className="h-9 w-60 rounded-lg border-neutral-300 bg-transparent px-2.5 text-xs font-normal text-muted-foreground hover:border-neutral-400 dark:border-neutral-700 dark:hover:border-neutral-600 focus-within:ring-0"
-                style={{ height: "36px" }}
-              >
-                <MultiSelectValue
-                  placeholder="Search tags…"
-                  className="ml-1 text-xs font-normal text-muted-foreground"
-                >
-                  {(value, label) => (
-                    <span className="inline-flex items-center gap-1.5">
-                      <span
-                        className={cn(
-                          "h-1.5 w-1.5 rounded-full",
-                          getTagColor(value)
-                        )}
-                      />
-                      {label}
-                    </span>
-                  )}
-                </MultiSelectValue>
-                <MultiSelectInput
-                  aria-label="Search tags"
-                  placeholder=""
-                  className="ml-1 h-5 flex-1 text-xs"
-                />
-              </MultiSelectTrigger>
-              <MultiSelectContent>
-                <MultiSelectList>
-                  <MultiSelectGroup>
-                    <MultiSelectLabel>Types</MultiSelectLabel>
-                    {allTypes.map((t) => (
-                      <MultiSelectItem key={`type-${t}`} value={t}>
-                        <span className="inline-flex items-center gap-2">
-                          <span
-                            className={cn(
-                              "h-1.5 w-1.5 rounded-full",
-                              getTypeColor(t)
-                            )}
-                          />
-                          {t}
-                        </span>
-                      </MultiSelectItem>
-                    ))}
-                  </MultiSelectGroup>
-                  <MultiSelectSeparator />
-                  <MultiSelectGroup>
-                    <MultiSelectLabel>Actions</MultiSelectLabel>
-                    {allActions.map((a) => (
-                      <MultiSelectItem key={`action-${a}`} value={a}>
-                        <span className="inline-flex items-center gap-2">
-                          <span
-                            className={cn(
-                              "h-1.5 w-1.5 rounded-full",
-                              getActionColor(a)
-                            )}
-                          />
-                            {a}
-                          </span>
-                      </MultiSelectItem>
-                    ))}
-                  </MultiSelectGroup>
-                  <MultiSelectEmpty>No tags found.</MultiSelectEmpty>
-                </MultiSelectList>
-              </MultiSelectContent>
-            </MultiSelect>
-
-            <AddTagButton
-              onAddType={addType}
-              onAddAction={addAction}
-              existingTypes={allTypes}
-              existingActions={allActions}
-            />
+              {(item) => (
+                <span className="inline-flex flex-1 items-center gap-2">
+                  <span
+                    className={cn("h-1.5 w-1.5 rounded-full", item.color)}
+                  />
+                  {item.name}
+                </span>
+              )}
+            </MultipleSelect>
 
             <AddBookmarkButton
               allTypes={allTypes}
@@ -1799,7 +1605,11 @@ export default function BookmarkPage() {
             <button
               type="button"
               onClick={clearAll}
-              className="inline-flex items-center justify-center rounded-lg border border-neutral-300 px-3.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-neutral-200/60 hover:text-foreground dark:border-neutral-700 dark:hover:bg-neutral-800/60"
+              className={cn(
+                "inline-flex items-center justify-center rounded-lg border px-3.5 text-xs font-medium transition-all",
+                "border-red-500 bg-red-500 text-white hover:bg-red-600 hover:border-red-600",
+                "dark:border-red-500 dark:bg-red-500 dark:text-white dark:hover:bg-red-600"
+              )}
               style={{ height: "36px" }}
             >
               Clear All
@@ -1822,7 +1632,7 @@ export default function BookmarkPage() {
             }}
           />
 
-          {/* PILLS ROW: first 3 type + first 3 action */}
+          {/* PILLS ROW: first 3 type + first 3 action + Add tag */}
           <div className="flex flex-wrap items-center justify-center gap-2">
             {allTypes.slice(0, 3).map((t) => (
               <FilterPill
@@ -1834,6 +1644,10 @@ export default function BookmarkPage() {
                 onRemove={customTypes.some((c) => c.label === t) ? () => removeType(t) : undefined}
               />
             ))}
+            <span
+              aria-hidden
+              className="mx-0.5 h-5 w-px bg-neutral-300 dark:bg-neutral-700"
+            />
             {allActions.slice(0, 3).map((a) => (
               <FilterPill
                 key={a}
@@ -1848,12 +1662,22 @@ export default function BookmarkPage() {
                 }
               />
             ))}
+            <AddTagButton
+              onAddType={addType}
+              onAddAction={addAction}
+              existingTypes={allTypes}
+              existingActions={allActions}
+            />
           </div>
         </div>
         </div>
 
         <div className="mt-10">
-          {filtered.length === 0 ? (
+          {!apiLoaded ? (
+            <div className="rounded-lg border border-dashed border-neutral-300 px-4 py-10 text-center text-sm text-muted-foreground dark:border-neutral-700">
+              Loading bookmarks from Supabase…
+            </div>
+          ) : filtered.length === 0 ? (
             <div className="rounded-lg border border-dashed border-neutral-300 px-4 py-10 text-center text-sm text-muted-foreground dark:border-neutral-700">
               No bookmarks match your filters.
             </div>

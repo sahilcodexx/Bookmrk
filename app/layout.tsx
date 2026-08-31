@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+import { Toaster } from "@/components/ui/toast";
+import { CommandPaletteRoot } from "@/components/command-palette-root";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -33,6 +35,12 @@ export default function RootLayout({
           <Header />
 
           {children}
+
+          {/* Global command palette (Cmd/Ctrl+K). */}
+          <CommandPaletteRoot />
+
+          {/* Toast viewport — one per app, sits above the page content. */}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
