@@ -22,4 +22,25 @@ const Input = React.forwardRef<
 })
 Input.displayName = "Input"
 
-export { Input }
+// `InputGroup` is a thin wrapper around an inline-flex container — used by
+// the intentui MultipleSelect to lay out an icon + the input + a clear
+// button. Adding it here keeps the intentui SearchField/Field API
+// (which imports `InputGroup` from `./input`) happy without dragging in
+// their full intentui Input primitive.
+const InputGroup = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<"div">
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-slot="input-group"
+    className={cn(
+      "flex h-9 w-full items-center gap-2 rounded-lg border border-input bg-input/20 px-2.5 text-sm transition-colors [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/30 dark:bg-input/30",
+      className,
+    )}
+    {...props}
+  />
+))
+InputGroup.displayName = "InputGroup"
+
+export { Input, InputGroup }

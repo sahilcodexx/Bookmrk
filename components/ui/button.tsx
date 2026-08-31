@@ -29,6 +29,11 @@ const buttonVariants = cva(
         "icon-xs": "size-5 rounded-sm [&_svg:not([class*='size-'])]:size-2.5",
         "icon-sm": "size-6 [&_svg:not([class*='size-'])]:size-3",
         "icon-lg": "size-8 [&_svg:not([class*='size-'])]:size-4",
+        // Square xs — added so the intentui MultipleSelect's trailing
+        // "open popover" button (which ships with this prop name) works
+        // against our Base UI button without an adapter.
+        "sq-xs":
+          "size-6 rounded-md p-0 [&_svg:not([class*='size-'])]:size-3.5",
       },
     },
     defaultVariants: {
@@ -41,13 +46,25 @@ const buttonVariants = cva(
 function Button({
   className,
   variant = "default",
+  // The intentui MultipleSelect passes `intent` (e.g. "secondary") where
+  // our CVA expects `variant`. Map it through so both APIs work.
+  intent,
   size = "default",
   ...props
-}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+}: ButtonPrimitive.Props &
+  VariantProps<typeof buttonVariants> & { intent?: string }) {
   return (
     <ButtonPrimitive
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(
+        buttonVariants({
+          variant: (intent ?? variant) as VariantProps<
+            typeof buttonVariants
+          >["variant"],
+          size,
+          className,
+        })
+      )}
       {...props}
     />
   )

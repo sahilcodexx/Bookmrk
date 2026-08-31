@@ -143,8 +143,15 @@ function DialogDescription({
   )
 }
 
+// `DialogBody` is the intentui naming for the panel that lives between
+// the header and footer. The intentui `popover.tsx` and `field.tsx`
+// import it by that name, so re-export an alias of our existing
+// `DialogContent` to keep the dependency happy.
+const DialogBody = DialogContent;
+
 export {
   Dialog,
+  DialogBody,
   DialogClose,
   DialogContent,
   DialogDescription,
